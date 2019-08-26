@@ -5,8 +5,9 @@ phases:
     commands:
       - echo Logging in to Amazon ECR...
       - aws --version
+      - ACCOUNT_ID=$(aws sts get-caller-identity --output text --query 'Account')
       - $(aws ecr get-login --region $AWS_DEFAULT_REGION --no-include-email)
-      - REPOSITORY_URI=331456484691.dkr.ecr.eu-central-1.amazonaws.com/python-ex
+      - REPOSITORY_URI=$(echo $ACCOUNT_ID).ecr.eu-central-1.amazonaws.com/python-ex
       - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
       - IMAGE_TAG=${COMMIT_HASH:=latest}
   build:
