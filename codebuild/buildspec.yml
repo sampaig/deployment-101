@@ -6,6 +6,7 @@ phases:
       docker: 18
   build:
     commands:
-      - echo Uploading Artifacts to S3
+        - echo Uploading Artifacts to S3
 artifacts:
-    files: **/*
+    files: 
+        - '**/*'
